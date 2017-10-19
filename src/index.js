@@ -63,7 +63,7 @@ setInterval(function() {
 
     let cb = function(error, resp, body) {
         if (error != null) {
-            console.log("[fuzzy-rotary-phone] error when trying to submit data: ", err);
+            console.log("[fuzzy-rotary-phone] error when trying to submit data: ", error);
             return;
         }
 
