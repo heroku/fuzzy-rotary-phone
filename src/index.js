@@ -69,7 +69,8 @@ setInterval(function() {
         }
 
         if (resp.statusCode != 200) {
-            console.log("[fuzzy-rotary-phone] expected 200 when trying to submit data, got: ", resp.statusCode);
+            console.log("[fuzzy-rotary-phone] expected 200 when trying to submit data, got:", resp.statusCode);
+            console.log("[fuzzy-rotary-phone] body:", body);
             return;
         }
     };
