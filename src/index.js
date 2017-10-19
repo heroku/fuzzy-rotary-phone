@@ -60,12 +60,12 @@ setInterval(function() {
 
     let cb = function(error, resp, body) {
         if (err != null) {
-            console.log("[hk-runtime-metrics] error when trying to submit data: ", err);
+            console.log("[fuzzy-rotary-phone] error when trying to submit data: ", err);
             return;
         }
 
         if (resp.statusCode != 200) {
-            console.log("[hk-runtime-metrics] expected 200 when trying to submit data, got: ", resp.statusCode);
+            console.log("[fuzzy-rotary-phone] expected 200 when trying to submit data, got: ", resp.statusCode);
             return;
         }
     };
