@@ -1,0 +1,23 @@
+{
+  "name": "@xena/hk-runtime-metrics",
+  "version": "0.0.1",
+  "description": "A hack designed to prototype out runtime metrics.",
+  "main": "src/index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Xe/fuzzy-rotary-phone.git"
+  },
+  "author": "Christine Dodrill <me@christine.website>",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Xe/fuzzy-rotary-phone/issues"
+  },
+  "homepage": "https://github.com/Xe/fuzzy-rotary-phone#readme",
+  "dependencies": {
+    "gc-stats": "^1.0.2",
+    "request": "^2.83.0"
+  }
+}
