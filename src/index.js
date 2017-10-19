@@ -59,7 +59,7 @@ setInterval(function() {
             "Content-Type": "application/json"
         },
         body: JSON.stringify(data),
-        timeout: 250 // at max stops customer app for 250 ms
+        timeout: 100 // at max stops customer app for 100 ms
     };
 
     let cb = function(error, resp, body) {
