@@ -1,5 +1,5 @@
 {
-  "name": "@xena/hk-runtime-metrics",
+  "name": "fuzzy-rotary-phone",
   "version": "0.0.1",
   "description": "A hack designed to prototype out runtime metrics.",
   "main": "src/index.js",
