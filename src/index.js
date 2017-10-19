@@ -38,6 +38,7 @@ gc.on('stats', function (stats) {
 
 // every 20 seconds, submit a metrics payload to metricsURL.
 setInterval(function() {
+    // the metrics data collected above.
     data = {
         counters: {
             "node.gc.collections": gcCount,
@@ -52,10 +53,17 @@ setInterval(function() {
 
     // post data to metricsURL
     options = {
+        method: "POST",
         url: metricsURL,
         headers: {
             "Content-Type": "application/json"
-        }
+        },
+        multipart: [
+            {
+                "content-type": "application/json",
+                body: JSON.stringify(data)
+            }
+        ]
     };
 
     let cb = function(error, resp, body) {
