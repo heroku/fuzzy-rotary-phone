@@ -58,7 +58,8 @@ setInterval(function() {
         headers: {
             "Content-Type": "application/json"
         },
-        body: JSON.stringify(data)
+        body: JSON.stringify(data),
+        timeout: 250 // at max stops customer app for 250 ms
     };
 
     let cb = function(error, resp, body) {
