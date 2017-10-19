@@ -54,20 +54,15 @@ setInterval(function() {
     // post data to metricsURL
     options = {
         method: "POST",
-        url: metricsURL,
+        uri: metricsURL,
         headers: {
             "Content-Type": "application/json"
         },
-        multipart: [
-            {
-                "content-type": "application/json",
-                body: JSON.stringify(data)
-            }
-        ]
+        body: JSON.stringify(data)
     };
 
     let cb = function(error, resp, body) {
-        if (err != null) {
+        if (error != null) {
             console.log("[fuzzy-rotary-phone] error when trying to submit data: ", err);
             return;
         }
