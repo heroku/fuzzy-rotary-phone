@@ -83,7 +83,7 @@ eventLoopMonitor.on("data", ({ ticks }) => {
     } else if (time <= 2000) {
       acc["2000"] = acc["2000"] ? acc["2000"] + 1 : 1;
     } else if (time > 2000) {
-      acc["2000+"] = acc["1000"] ? acc["1000"] + 1 : 1;
+      acc["2000+"] = acc["2000+"] ? acc["2000+"] + 1 : 1;
     }
     return acc;
   }, latencies);
@@ -99,7 +99,19 @@ setInterval(() => {
   // the metrics data collected above.
   data = {
     counters: {
-      // How do I submit event loop latencies here?
+      "node.eventloop.activity.0.milliseconds": latencies['0'] || 0,
+      "node.eventloop.activity.1.milliseconds": latencies['1'] || 0,
+      "node.eventloop.activity.2.milliseconds": latencies['2'] || 0,
+      "node.eventloop.activity.5.milliseconds": latencies['5'] || 0,
+      "node.eventloop.activity.10.milliseconds": latencies['10'] || 0,
+      "node.eventloop.activity.20.milliseconds": latencies['20'] || 0,
+      "node.eventloop.activity.50.milliseconds": latencies['50'] || 0,
+      "node.eventloop.activity.100.milliseconds": latencies['100'] || 0,
+      "node.eventloop.activity.200.milliseconds": latencies['200'] || 0,
+      "node.eventloop.activity.400.milliseconds": latencies['400'] || 0,
+      "node.eventloop.activity.1000.milliseconds": latencies['1000'] || 0,
+      "node.eventloop.activity.2000.milliseconds": latencies['2000'] || 0,
+      "node.eventloop.activity.2000+.milliseconds": latencies['2000+'] || 0,
       "node.gc.collections": gcCount,
       "node.gc.pause.ns": pauseNS
     },
