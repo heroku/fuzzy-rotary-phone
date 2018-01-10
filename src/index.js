@@ -99,6 +99,7 @@ setInterval(() => {
   // the metrics data collected above.
   data = {
     counters: {
+      // How do I submit event loop latencies here?
       "node.gc.collections": gcCount,
       "node.gc.pause.ns": pauseNS
     },
