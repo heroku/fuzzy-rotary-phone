@@ -33,7 +33,7 @@ class EventLoopMonitor extends EventEmitter {
     const start = process.hrtime();
     this._loopMonitor = setTimeout(() => {
       const diff = process.hrtime(start);
-      this._ticks.push(Math.floor(diffToMs(diff) - INTERVAL));
+      this._ticks.push(diffToMs(diff) - INTERVAL);
       this.measureTick();
     }, INTERVAL);
   }

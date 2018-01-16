@@ -10,15 +10,6 @@ eventLoopMonitor.start();
 // This is reset every metrics submission run.
 let pauseNS = 0;
 
-// usedHeapSize is the number of bytes in the heap that are actively being used.
-let usedHeapSize = 0;
-
-// totalHeapSize is the total number of bytes in the heap.
-let totalHeapSize = 0;
-
-// heapSizeLimit is the maximum size of the heap.
-let heapSizeLimit = 0;
-
 // gcCount is the number of garbage collections that have been observed between
 // metrics runs. This is reset every metrics submission run.
 let gcCount = 0;
@@ -45,9 +36,6 @@ gc.on("stats", stats => {
   gcCount++;
 
   pauseNS = pauseNS + stats.pause;
-  usedHeapSize = stats.after.usedHeapSize;
-  totalHeapSize = stats.after.totalHeapSize;
-  heapSizeLimit = stats.after.heapSizeLimit;
 });
 
 eventLoopMonitor.on("data", ({ ticks }) => {
@@ -58,32 +46,38 @@ eventLoopMonitor.on("data", ({ ticks }) => {
   // currently arbitrary, but can be decided based upon the needs of the
   // visualization in the metrics dashboard.
   ticks.reduce((acc, time) => {
-    if (time <= 0) {
-      acc["0"] = acc["0"] ? acc["0"] + 1 : 1;
-    } else if (time === 1) {
+    if (time <= 0.1) {
+      acc["0.1"] = acc["0.1"] ? acc["0.1"] + 1 : 1;
+    } else if (time <= 0.25) {
+      acc["0.25"] = acc["0.25"] ? acc["0.25"] + 1 : 1;
+    } else if (time <= 0.5) {
+      acc["0.5"] = acc["0.5"] ? acc["0.5"] + 1 : 1;
+    } else if (time <= 1) {
       acc["1"] = acc["1"] ? acc["1"] + 1 : 1;
-    } else if (time === 2) {
+    } else if (time <= 2) {
       acc["2"] = acc["2"] ? acc["2"] + 1 : 1;
-    } else if (time <= 5) {
-      acc["5"] = acc["5"] ? acc["5"] + 1 : 1;
-    } else if (time <= 10) {
-      acc["10"] = acc["10"] ? acc["10"] + 1 : 1;
-    } else if (time <= 20) {
-      acc["20"] = acc["20"] ? acc["20"] + 1 : 1;
-    } else if (time <= 50) {
-      acc["50"] = acc["50"] ? acc["50"] + 1 : 1;
-    } else if (time <= 100) {
-      acc["100"] = acc["100"] ? acc["100"] + 1 : 1;
-    } else if (time <= 200) {
-      acc["200"] = acc["200"] ? acc["200"] + 1 : 1;
-    } else if (time <= 400) {
-      acc["400"] = acc["400"] ? acc["400"] + 1 : 1;
-    } else if (time <= 1000) {
-      acc["1000"] = acc["1000"] ? acc["1000"] + 1 : 1;
-    } else if (time <= 2000) {
-      acc["2000"] = acc["2000"] ? acc["2000"] + 1 : 1;
-    } else if (time > 2000) {
-      acc["2000+"] = acc["2000+"] ? acc["2000+"] + 1 : 1;
+    } else if (time <= 4) {
+      acc["4"] = acc["4"] ? acc["4"] + 1 : 1;
+    } else if (time <= 8) {
+      acc["8"] = acc["8"] ? acc["8"] + 1 : 1;
+    } else if (time <= 16) {
+      acc["16"] = acc["16"] ? acc["16"] + 1 : 1;
+    } else if (time <= 32) {
+      acc["32"] = acc["32"] ? acc["32"] + 1 : 1;
+    } else if (time <= 64) {
+      acc["64"] = acc["64"] ? acc["64"] + 1 : 1;
+    } else if (time <= 128) {
+      acc["128"] = acc["128"] ? acc["128"] + 1 : 1;
+    } else if (time <= 256) {
+      acc["256"] = acc["256"] ? acc["256"] + 1 : 1;
+    } else if (time <= 512) {
+      acc["512"] = acc["512"] ? acc["512"] + 1 : 1;
+    } else if (time <= 1024) {
+      acc["1024"] = acc["1024"] ? acc["1024"] + 1 : 1;
+    } else if (time <= 2048) {
+      acc["2048"] = acc["2048"] ? acc["2048"] + 1 : 1;
+    } else if (time > 2048) {
+      acc["2048+"] = acc["2048+"] ? acc["2048+"] + 1 : 1;
     }
     return acc;
   }, latencies);
@@ -99,26 +93,26 @@ setInterval(() => {
   // the metrics data collected above.
   data = {
     counters: {
-      "node.eventloop.latency.0.ms": latencies['0'] || 0,
+      "node.eventloop.latency.0.1.ms": latencies['0.1'] || 0,
+      "node.eventloop.latency.0.25.ms": latencies['0.25'] || 0,
+      "node.eventloop.latency.0.5.ms": latencies['0.5'] || 0,
       "node.eventloop.latency.1.ms": latencies['1'] || 0,
       "node.eventloop.latency.2.ms": latencies['2'] || 0,
-      "node.eventloop.latency.5.ms": latencies['5'] || 0,
-      "node.eventloop.latency.10.ms": latencies['10'] || 0,
-      "node.eventloop.latency.20.ms": latencies['20'] || 0,
-      "node.eventloop.latency.50.ms": latencies['50'] || 0,
-      "node.eventloop.latency.100.ms": latencies['100'] || 0,
-      "node.eventloop.latency.200.ms": latencies['200'] || 0,
-      "node.eventloop.latency.400.ms": latencies['400'] || 0,
-      "node.eventloop.latency.1000.ms": latencies['1000'] || 0,
-      "node.eventloop.latency.2000.ms": latencies['2000'] || 0,
-      "node.eventloop.latency.2000+.ms": latencies['2000+'] || 0,
+      "node.eventloop.latency.4.ms": latencies['4'] || 0,
+      "node.eventloop.latency.8.ms": latencies['8'] || 0,
+      "node.eventloop.latency.16.ms": latencies['16'] || 0,
+      "node.eventloop.latency.32.ms": latencies['32'] || 0,
+      "node.eventloop.latency.64.ms": latencies['64'] || 0,
+      "node.eventloop.latency.128.ms": latencies['128'] || 0,
+      "node.eventloop.latency.256.ms": latencies['256'] || 0,
+      "node.eventloop.latency.512.ms": latencies['512'] || 0,
+      "node.eventloop.latency.1024.ms": latencies['1024'] || 0,
+      "node.eventloop.latency.2048.ms": latencies['2048'] || 0,
+      "node.eventloop.latency.2048+.ms": latencies['2048+'] || 0,
       "node.gc.collections": gcCount,
       "node.gc.pause.ns": pauseNS
     },
     gauges: {
-      "node.heap.inuse.bytes": usedHeapSize,
-      "node.heap.total.bytes": totalHeapSize,
-      "node.heap.limit.bytes": heapSizeLimit,
       "node.eventloop.usage.percent": averageArray(eventLoopPercentageEstimates)
     }
   };
