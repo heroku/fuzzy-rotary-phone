@@ -1,6 +1,6 @@
 {
   "name": "fuzzy-rotary-phone",
-  "version": "0.1.6",
+  "version": "0.1.7",
   "description": "A hack designed to prototype out runtime metrics.",
   "main": "src/index.js",
   "scripts": {

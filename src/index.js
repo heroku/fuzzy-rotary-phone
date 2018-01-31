@@ -113,7 +113,7 @@ setInterval(() => {
       "node.gc.pause.ns": pauseNS
     },
     gauges: {
-      "node.eventloop.usage.percent": averageArray(eventLoopPercentageEstimates)
+      "node.eventloop.usage.percent": averageArray(eventLoopPercentageEstimates) || 0
     }
   };
 
