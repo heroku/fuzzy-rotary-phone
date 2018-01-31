@@ -91,6 +91,16 @@ function averageArray(arr) {
 // every 20 seconds, submit a metrics payload to metricsURL.
 setInterval(() => {
   // the metrics data collected above.
+
+  // aa is the averate of the event loop percentage estimates.
+  // this is a variable because 4/0 in node is Infinity, not a
+  // runtime exception.
+  let aa = averageArray(eventLoopPercentageEstimates);
+
+  if (aa == Infinity) {
+    aa = 0;
+  }
+
   data = {
     counters: {
       "node.eventloop.latency.0.1.ms": latencies['0.1'] || 0,
@@ -113,7 +123,7 @@ setInterval(() => {
       "node.gc.pause.ns": pauseNS
     },
     gauges: {
-      "node.eventloop.usage.percent": averageArray(eventLoopPercentageEstimates) || 0
+      "node.eventloop.usage.percent": aa
     }
   };
 
