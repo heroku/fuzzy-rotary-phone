@@ -17,7 +17,7 @@
   },
   "homepage": "https://github.com/Xe/fuzzy-rotary-phone#readme",
   "dependencies": {
-    "gc-stats": "^1.0.2",
+    "gc-stats": "^1.2.0",
     "measured": "^1.1.0",
     "request": "^2.83.0"
   }
