@@ -19,6 +19,6 @@
   "dependencies": {
     "gc-stats": "^1.0.2",
     "measured": "^1.1.0",
-    "request": "^2.83.0"
+    "request": "^2.88.2"
   }
 }
